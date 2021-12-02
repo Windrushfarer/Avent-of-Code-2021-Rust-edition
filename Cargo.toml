@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "packages/lib",
+    "packages/day_1"
+]
