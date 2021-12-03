@@ -3,5 +3,6 @@ resolver = "2"
 
 members = [
     "packages/lib",
-    "packages/day_1"
+    "packages/day_1",
+    "packages/day_2",
 ]
