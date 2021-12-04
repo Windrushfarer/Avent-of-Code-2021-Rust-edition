@@ -5,4 +5,5 @@ members = [
     "packages/lib",
     "packages/day_1",
     "packages/day_2",
+    "packages/day_3",
 ]
