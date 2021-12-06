@@ -128,7 +128,6 @@ fn part_two() {
     }).collect::<Vec<_>>();
 
   let mut winner_found = false;
-  let mut first_winner: i8 = -1;
 
   let mut visited: Vec<Vec<Vec<u8>>> = (0..boards.len())
     .map(|_| {
@@ -164,38 +163,39 @@ fn part_two() {
       let winner = boards.iter()
         .enumerate()
         .filter(|(i, board)| {
-          first_winner != *i as i8 && has_bingo(&visited.get(*i).unwrap())
+          has_bingo(&visited.get(*i).unwrap())
         })
         .last();
 
       if winner.is_some() {
         let (board_index, winner_board) = winner.unwrap();
+        println!("{}", boards.len());
+        if boards.len() == 1 {
+          let score_unvisited: u32 = winner_board.iter()
+            .enumerate()
+            .fold(0, |sum, (r_index, row)| {
+              let row_sum: u32 = row.iter()
+                .enumerate()
+                .fold(0, |s, (col_index, n)| {
+                  if visited[board_index][r_index][col_index] == 0 {
+                    return s + n
+                  }
 
-        if first_winner == -1 {
-          first_winner = board_index as i8;
+                  return s
+                });
+
+              sum + row_sum as u32
+            });
+
+          winner_found = true;
+
+          return Some(score_unvisited * *num)
+        } else {
+          boards.remove(board_index);
+          visited.remove(board_index);
 
           return Some(0);
         }
-        println!("{}", first_winner);
-        let score_unvisited: u32 = winner_board.iter()
-          .enumerate()
-          .fold(0, |sum, (r_index, row)| {
-            let row_sum: u32 = row.iter()
-              .enumerate()
-              .fold(0, |s, (col_index, n)| {
-                if visited[board_index][r_index][col_index] == 0 {
-                  return s + n
-                }
-
-                return s
-              });
-
-            sum + row_sum as u32
-          });
-
-        winner_found = true;
-
-        return Some(score_unvisited * *num)
       }
 
       return Some(0);
@@ -203,7 +203,7 @@ fn part_two() {
     .last()
     .unwrap();
 
-  println!("{:?}", score)
+  println!("{:?}", boards)
 }
 
 pub fn main() {
