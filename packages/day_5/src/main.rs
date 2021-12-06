@@ -35,8 +35,8 @@ fn part_one() {
     let y_start = *min(y1, y2);
     let y_end = *max(y1, y2);
 
-    for x in x_start..x_end + 1 {
-      for y in y_start..y_end + 1 {
+    for x in x_start..=x_end {
+      for y in y_start..=y_end {
         let y_coord = y as usize;
         let x_coord = x as usize;
 
@@ -131,8 +131,8 @@ fn part_two() {
         }
       }
     } else {
-      for x in x_start..x_end + 1 {
-        for y in y_start..y_end + 1 {
+      for x in x_start..=x_end {
+        for y in y_start..=y_end {
           let y_coord = y as usize;
           let x_coord = x as usize;
 
