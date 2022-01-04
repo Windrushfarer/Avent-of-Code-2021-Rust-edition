@@ -1,0 +1,5 @@
+[package]
+name = "aoc_day_8"
+version = "1.0.0"
+authors = ["Windrushfarer"]
+edition = "2021"
